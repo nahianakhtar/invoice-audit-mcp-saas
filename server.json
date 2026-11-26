@@ -1,0 +1,12 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+  "name": "io.github.nahianakhtar/invoice-audit-mcp-saas",
+  "description": "Zero-dependency 128-bit micro-dollar invoice audit REST & MCP 2025-11-25 server with SQLite WAL HTTP 402 metering, Stripe HMAC webhooks, SHA-256 Merkle proofs, and Benford first-digit scoring.",
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "http://127.0.0.1:8088/mcp"
+    }
+  ]
+}

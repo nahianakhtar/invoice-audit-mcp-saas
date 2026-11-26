@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff pytest
+      - run: ruff check .
+      - run: PYTHONPATH=. pytest -q
+      - name: Smoke test CLI clean fixture
+        run: |
+          python3 -c 'import json; open("sample.json","w").write(json.dumps([{"id":"INV-1","vendor":"Acme","total_usd":"120.00","line_items":[{"qty":3,"unit_price_usd":"40.00"}]}]))'
+          python3 app.py --audit-file sample.json --out sample_report.json

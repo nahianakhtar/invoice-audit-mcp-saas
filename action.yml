@@ -1,0 +1,17 @@
+name: "Invoice Audit Micro-Dollar & Benford CI"
+description: "Verify JSON or CSV invoice batches using 128-bit Decimal ROUND_HALF_EVEN math, SHA-256 Merkle proofs, and Benford scoring."
+inputs:
+  audit_file:
+    description: "Path to JSON or CSV invoice batch file"
+    required: true
+  out_file:
+    description: "Path for JSON audit report output"
+    required: false
+    default: "invoice-audit-report.json"
+runs:
+  using: "composite"
+  steps:
+    - name: Run 128-bit Invoice Audit
+      shell: bash
+      run: |
+        python3 "${{ github.action_path }}/app.py" --audit-file "${{ inputs.audit_file }}" --out "${{ inputs.out_file }}"
